@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb3lxh80qyq78"]
+
+[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_277j3"]
+[ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://pistol/pistol.png" id="1_hhycp"]
+[ext_resource type="Texture2D" uid="uid://bg2f7x413vw6r" path="res://Assets/chrice.png" id="2_dsgla"]
+[ext_resource type="Script" path="res://range_indicator.gd" id="3_i55yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pv7e1"]
+radius = 388.784
+
+[node name="Gun" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_277j3")
+
+[node name="Range" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_pv7e1")
+
+[node name="RangeIndicator" type="Sprite2D" parent="Range"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("2_dsgla")
+script = ExtResource("3_i55yd")
+outline_color = Color(0, 1, 0, 0.14902)
+
+[node name="WeaponPivot" type="Marker2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="WeaponPivot"]
+position = Vector2(71, 9)
+texture = ExtResource("1_hhycp")
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Pistol"]
+unique_name_in_owner = true
+position = Vector2(26, -9)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

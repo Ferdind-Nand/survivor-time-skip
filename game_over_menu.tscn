@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuthax6jlisxh"]
+
+[ext_resource type="Script" path="res://Scripts/menu_game_over.gd" id="1_hoirk"]
+[ext_resource type="FontFile" uid="uid://bohwx3lgysra8" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="2_nbvj1"]
+
+[node name="GameOverMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_hoirk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.552941)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_nbvj1")
+theme_override_font_sizes/font_size = 150
+text = "Game Over"
+
+[node name="RestartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 91.0
+offset_right = 102.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_nbvj1")
+theme_override_font_sizes/font_size = 56
+button_mask = 7
+text = "Restart"
+expand_icon = true
+
+[node name="ExitButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -194.0
+offset_right = 4.0
+offset_bottom = -186.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_nbvj1")
+theme_override_font_sizes/font_size = 26
+text = "EXIT GAME"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://invqav08ym84"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_d5rdk"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_pigs1"]
+[ext_resource type="PackedScene" uid="uid://bb3lxh80qyq78" path="res://gun.tscn" id="3_vauso"]
+[ext_resource type="PackedScene" uid="uid://chkmxli5ah385" path="res://knight_girl.tscn" id="4_lkv4g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_02m08"]
+radius = 25.0
+height = 70.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqt8j"]
+radius = 18.9055
+height = 69.8806
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ptpb"]
+bg_color = Color(0.0823529, 0.34902, 0.247059, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quoja"]
+bg_color = Color(0.388235, 0.8, 0.372549, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bupxs"]
+bg_color = Color(0.142342, 0.375755, 0.585082, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5tlm"]
+bg_color = Color(0.0627451, 0.698039, 0.937255, 1)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_d5rdk")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_pigs1")]
+unique_name_in_owner = true
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -35.44)
+shape = SubResource("CapsuleShape2D_02m08")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_vauso")]
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -28.91)
+scale = Vector2(0.925, 0.925)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_mqt8j")
+debug_color = Color(0.833267, 0.331696, 0.538296, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -49.0
+offset_top = -126.0
+offset_right = 49.0
+offset_bottom = -111.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5ptpb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_quoja")
+value = 100.0
+show_percentage = false
+
+[node name="ExperienceBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -92.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 53.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bupxs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t5tlm")
+show_percentage = false
+
+[node name="Knight_Girl" parent="." instance=ExtResource("4_lkv4g")]
+unique_name_in_owner = true
+position = Vector2(0, -51)
+scale = Vector2(1.54, 1.54)

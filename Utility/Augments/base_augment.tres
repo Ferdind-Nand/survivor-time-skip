@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Augments" load_steps=2 format=3 uid="uid://chjnl7k0iiek6"]
+
+[ext_resource type="Script" path="res://Utility/Augments/augments.gd" id="1_d24hk"]
+
+[resource]
+script = ExtResource("1_d24hk")
+title = 0
+value = 0.0

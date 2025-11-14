@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://sfhhktai2djt"]
+
+[ext_resource type="Script" path="res://Utility/Enemy/enemy_stats.gd" id="1_xjsmq"]
+
+[resource]
+script = ExtResource("1_xjsmq")
+base_health = 3
+base_speed = 400
