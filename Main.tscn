@@ -62,11 +62,11 @@ position = Vector2(1327, 669)
 position = Vector2(1391, 281)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 11.078
 autostart = true
 
 [node name="WaveIncreaseTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.445
 autostart = true
 
 [node name="AugmentSelection" type="CanvasLayer" parent="."]
@@ -243,7 +243,6 @@ visible = false
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="WaveIncreaseTimer" to="." method="_on_wave_increase_timer_timeout"]
-[connection signal="timeout" from="WaveIncreaseTimer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="AugmentSelection/Augment1" to="." method="_on_augment_1_pressed"]
 [connection signal="pressed" from="AugmentSelection/Augment2" to="." method="_on_augment_2_pressed"]
 [connection signal="pressed" from="AugmentSelection/Augment3" to="." method="_on_augment_3_pressed"]

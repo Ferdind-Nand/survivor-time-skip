@@ -8,6 +8,9 @@ signal stat_increase(stat_name, increase_value)
 var augments_value:= [0,0,0]
 var augments_index:= [0,0,0]
 var augment_title: String
+var mob_spawn_count := 4
+var wave_count := 1
+
 @onready var player = $Player
 @onready var pauseMenu = $PauseMenu
 @onready var gameOverMenu = $GameOverMenu
@@ -37,9 +40,6 @@ var possible_augments = [
 
 func _ready():
 	spawn_mob()
-	spawn_mob()
-	spawn_mob()
-	spawn_mob()
 	%DebugOverlay.get_node("StatsWindow").text = "Debug Window Test"
 	Global.main = self
 
@@ -57,11 +57,14 @@ func pause_menu():
 	
 	paused = !paused
 
-func spawn_mob():
-	var new_mob = preload("res://mob.tscn").instantiate()
-	%PathFollow2D.progress_ratio = randf()
-	new_mob.global_position = %PathFollow2D.global_position
-	add_child(new_mob)
+func spawn_mob(count := mob_spawn_count):
+	var mob_scene := preload("res://mob.tscn")
+
+	for i in count:
+		%PathFollow2D.progress_ratio = randf()
+		var mob := mob_scene.instantiate()
+		mob.global_position = %PathFollow2D.global_position
+		add_child(mob)
 
 func _on_timer_timeout() -> void:
 	if enemy_spawn == EnemySpawn.ON:
@@ -70,7 +73,8 @@ func _on_timer_timeout() -> void:
 		pass
 
 func _on_wave_increase_timer_timeout() -> void:
-	pass	#include function to reduce the spawn timer for the mobs
+	mob_spawn_count += 1
+	wave_count += 1
 
 func _on_player_health_depleted() -> void:
 	%GameOverMenu.visible = true
