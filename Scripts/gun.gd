@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func set_attack_speed(value:float) -> void:
+	%Crossbow.speed_scale += value /100
 	timer.wait_time = base_fire_rate / value
 	if not timer.is_stopped():
 		timer.start()
@@ -77,6 +78,7 @@ func shoot(angle := 0.0):
 	
 
 func shoot_weapon() -> void:
+	%Crossbow.play("default")
 	if fire_type == FireType.SINGLE:
 		shoot()
 	elif fire_type == FireType.DOUBLE:

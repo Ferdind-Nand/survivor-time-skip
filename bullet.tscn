@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvs4bcpnaryq2"]
 
-[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_aenxe"]
-[ext_resource type="Texture2D" uid="uid://dftkbqwsfd68r" path="res://pistol/projectile.png" id="1_eug00"]
+[ext_resource type="Script" uid="uid://b77t6lfd8upjx" path="res://Scripts/bullet.gd" id="1_aenxe"]
+[ext_resource type="Texture2D" uid="uid://bobry2lyop4a0" path="res://Assets/weapons/crossbow/CrossbowArrow.png" id="2_v8qja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evona"]
 radius = 17.0
 
 [node name="Bullet" type="Area2D"]
 top_level = true
+texture_filter = 1
 rotation = 0.815073
 collision_layer = 0
 collision_mask = 3
@@ -15,7 +16,9 @@ script = ExtResource("1_aenxe")
 
 [node name="Projectile" type="Sprite2D" parent="."]
 position = Vector2(-11, 0)
-texture = ExtResource("1_eug00")
+texture = ExtResource("2_v8qja")
+region_enabled = true
+region_rect = Rect2(57, 5, 30, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_evona")

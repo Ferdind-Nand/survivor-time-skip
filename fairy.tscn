@@ -1,8 +1,8 @@
 [gd_scene load_steps=29 format=3 uid="uid://drp1bmkapfom6"]
 
-[ext_resource type="Texture2D" uid="uid://bhan4d3rkcn6d" path="res://Assets/characters/Fairy/Fairy 3.png" id="1_8o0ww"]
-[ext_resource type="Texture2D" uid="uid://dk8sl12s3k0ns" path="res://Assets/characters/Fairy/Fairy 2.png" id="2_t2h5l"]
-[ext_resource type="Texture2D" uid="uid://8ne5nfmjc7pt" path="res://Assets/characters/Fairy/Fairy 1.png" id="3_peqol"]
+[ext_resource type="Texture2D" uid="uid://bg5f0rbumjbp" path="res://Assets/characters/Fairy/Fairy 3.png" id="1_8o0ww"]
+[ext_resource type="Texture2D" uid="uid://dc6d45huo4j2v" path="res://Assets/characters/Fairy/Fairy 2.png" id="2_t2h5l"]
+[ext_resource type="Texture2D" uid="uid://b436hoc3q0gmc" path="res://Assets/characters/Fairy/Fairy 1.png" id="3_peqol"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_up6m8"]
 atlas = ExtResource("1_8o0ww")
@@ -129,7 +129,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"autum",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -199,4 +199,4 @@ scale = Vector2(1.875, 1.875)
 sprite_frames = SubResource("SpriteFrames_7yfb6")
 animation = &"autum"
 autoplay = "autum"
-frame_progress = 0.3985394
+frame_progress = 0.47668722
