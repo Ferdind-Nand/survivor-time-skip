@@ -1,14 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb3lxh80qyq78"]
+[gd_scene load_steps=15 format=3 uid="uid://bb3lxh80qyq78"]
 
-[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_277j3"]
-[ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://pistol/pistol.png" id="1_hhycp"]
-[ext_resource type="Texture2D" uid="uid://bg2f7x413vw6r" path="res://Assets/chrice.png" id="2_dsgla"]
-[ext_resource type="Script" path="res://range_indicator.gd" id="3_i55yd"]
+[ext_resource type="Script" uid="uid://d34pmmm0a4c78" path="res://Scripts/gun.gd" id="1_277j3"]
+[ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://pistol/pistol.png" id="1_hhycp"]
+[ext_resource type="Texture2D" uid="uid://rb36pk2jrmdg" path="res://Assets/chrice.png" id="2_dsgla"]
+[ext_resource type="Script" uid="uid://7yh2evgmtp5o" path="res://range_indicator.gd" id="3_i55yd"]
+[ext_resource type="Texture2D" uid="uid://dsqhlos036a1i" path="res://Assets/weapons/crossbow/CrossbowShoot.png" id="5_7vd5q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pv7e1"]
 radius = 388.784
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uerdb"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(288, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pact7"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(240, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffpt7"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(192, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q2t8"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(144, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k1dv"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(96, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8v55"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(48, 0, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr6yj"]
+atlas = ExtResource("5_7vd5q")
+region = Rect2(0, 0, 48, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsm00"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uerdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pact7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffpt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q2t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k1dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8v55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr6yj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
+
 [node name="Gun" type="Area2D"]
+texture_filter = 1
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_277j3")
@@ -29,12 +88,23 @@ outline_color = Color(0, 1, 0, 0.14902)
 [node name="WeaponPivot" type="Marker2D" parent="."]
 
 [node name="Pistol" type="Sprite2D" parent="WeaponPivot"]
+visible = false
 position = Vector2(71, 9)
 texture = ExtResource("1_hhycp")
 
-[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Pistol"]
+[node name="Crossbow" type="AnimatedSprite2D" parent="WeaponPivot"]
 unique_name_in_owner = true
-position = Vector2(26, -9)
+position = Vector2(36, 1)
+scale = Vector2(1.8333334, 1.8333334)
+sprite_frames = SubResource("SpriteFrames_nsm00")
+frame = 6
+frame_progress = 1.0
+speed_scale = 1.5
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Crossbow"]
+unique_name_in_owner = true
+position = Vector2(10.909092, 1.0909091)
+scale = Vector2(0.54545456, 0.54545456)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
