@@ -10,7 +10,7 @@ extends Sprite2D
 func _ready() -> void:
 	queue_redraw()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if visible_in_game:
 		queue_redraw()
 	else:

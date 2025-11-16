@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4q36yor6pxtr"]
 
-[ext_resource type="Script" path="res://Scripts/mob.gd" id="1_a2dgs"]
+[ext_resource type="Script" uid="uid://00vqentsrtbk" path="res://Scripts/mob.gd" id="1_a2dgs"]
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://characters/slime/slime.tscn" id="1_i7l2x"]
 [ext_resource type="Resource" uid="uid://sfhhktai2djt" path="res://Resources/blue_slime.tres" id="2_o722j"]
 
@@ -10,6 +10,7 @@ radius = 52.345
 [node name="Mob" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
+platform_floor_layers = 4294967040
 script = ExtResource("1_a2dgs")
 stats = ExtResource("2_o722j")
 

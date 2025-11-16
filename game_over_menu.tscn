@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuthax6jlisxh"]
 
-[ext_resource type="Script" path="res://Scripts/menu_game_over.gd" id="1_hoirk"]
-[ext_resource type="FontFile" uid="uid://bohwx3lgysra8" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="2_nbvj1"]
+[ext_resource type="Script" uid="uid://bp1m5jr5d4c1r" path="res://Scripts/menu_game_over.gd" id="1_hoirk"]
+[ext_resource type="FontFile" uid="uid://bl5bbhmi54l1i" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="2_nbvj1"]
 
 [node name="GameOverMenu" type="CanvasLayer"]
 process_mode = 2

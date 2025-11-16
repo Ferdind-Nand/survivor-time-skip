@@ -1,7 +1,5 @@
 extends Area2D
 
-class_name gun
-
 signal player_attacked
 
 @onready var timer = $Timer
@@ -27,7 +25,7 @@ func _ready() -> void:
 
 
 func set_attack_speed(value:float) -> void:
-	%Crossbow.speed_scale += value /100
+	%Crossbow.speed_scale += base_fire_rate / value
 	timer.wait_time = base_fire_rate / value
 	if not timer.is_stopped():
 		timer.start()
@@ -45,11 +43,12 @@ func set_pierce(value: float) -> void:
 	pierce = value
 
 func set_fire_type(value: int) -> void:
-	fire_type += value
+	fire_type = value as FireType
 	fire_type = clamp(fire_type, FireType.SINGLE, FireType.RING)
+	
 	print_debug("New fire type: ", fire_type)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# return overlapping areas as a list of arrays
 	var enemies_in_range = get_overlapping_bodies()
 	var target_enemy = get_nearest_enemy(get_overlapping_bodies())
@@ -73,7 +72,7 @@ func shoot(angle := 0.0):
 	new_bullet.global_rotation = %ShootingPoint.global_rotation + angle
 	new_bullet.bullet_damage = attack_damage
 	new_bullet.pierce = pierce
-	new_bullet.range = attack_range 
+	new_bullet.max_travel_distance = attack_range 
 	%ShootingPoint.add_child(new_bullet)
 	
 

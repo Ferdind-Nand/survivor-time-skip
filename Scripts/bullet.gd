@@ -3,7 +3,7 @@ extends Area2D
 var travelled_distance = 0
 var bullet_damage: float
 var pierce: int
-var range = 100
+var max_travel_distance = 100
 var hit_enemies = {}
 
 func _physics_process(delta: float) -> void:
@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	for body in get_overlapping_bodies():
 		print("Collided with: ", body.name)
 		
-	if travelled_distance > range:
+	if travelled_distance > max_travel_distance:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
