@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func set_attack_speed(value:float) -> void:
-	%Crossbow.speed_scale += value /100
+	%Crossbow.speed_scale += base_fire_rate / value
 	timer.wait_time = base_fire_rate / value
 	if not timer.is_stopped():
 		timer.start()
