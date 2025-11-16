@@ -43,8 +43,9 @@ func set_pierce(value: float) -> void:
 	pierce = value
 
 func set_fire_type(value: int) -> void:
-	fire_type += value
+	fire_type = value as FireType
 	fire_type = clamp(fire_type, FireType.SINGLE, FireType.RING)
+	
 	print_debug("New fire type: ", fire_type)
 
 func _physics_process(_delta: float) -> void:
