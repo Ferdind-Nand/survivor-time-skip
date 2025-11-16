@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://w2yt158768o7"]
 
-[ext_resource type="Texture2D" uid="uid://bbx8o2ex3m8p3" path="res://Assets/items&objects/autum trees.png" id="1_1s8l3"]
+[ext_resource type="Texture2D" uid="uid://cratu7amgp041" path="res://Assets/items&objects/autum trees.png" id="1_1s8l3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usc5w"]
 radius = 12.0
