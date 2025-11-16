@@ -73,7 +73,7 @@ func shoot(angle := 0.0):
 	new_bullet.global_rotation = %ShootingPoint.global_rotation + angle
 	new_bullet.bullet_damage = attack_damage
 	new_bullet.pierce = pierce
-	new_bullet.range = attack_range 
+	new_bullet.max_travel_distance = attack_range 
 	%ShootingPoint.add_child(new_bullet)
 	
 
