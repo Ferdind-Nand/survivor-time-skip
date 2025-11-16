@@ -1,7 +1,5 @@
 extends Area2D
 
-class_name gun
-
 signal player_attacked
 
 @onready var timer = $Timer
@@ -49,7 +47,7 @@ func set_fire_type(value: int) -> void:
 	fire_type = clamp(fire_type, FireType.SINGLE, FireType.RING)
 	print_debug("New fire type: ", fire_type)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# return overlapping areas as a list of arrays
 	var enemies_in_range = get_overlapping_bodies()
 	var target_enemy = get_nearest_enemy(get_overlapping_bodies())

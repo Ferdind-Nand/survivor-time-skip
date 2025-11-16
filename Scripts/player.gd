@@ -51,7 +51,7 @@ func _physics_process(delta):
 	player_animation()
 
 
-func _process(delta):
+func _process(_delta):
 	var debug_text = ""
 	for key in stats.keys():
 		debug_text += "%s: %.2f\n" %[key.capitalize(), stats[key]]

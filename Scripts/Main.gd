@@ -43,7 +43,7 @@ func _ready():
 	%DebugOverlay.get_node("StatsWindow").text = "Debug Window Test"
 	Global.main = self
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause_menu"):
 		pause_menu()
 		
@@ -80,17 +80,6 @@ func _on_player_health_depleted() -> void:
 	%GameOverMenu.visible = true
 	get_tree().paused = true
 
-# Menue with restart and exit button
-#func _on_restart_button_pressed() -> void:
-	#print("Debug message: Pressed restart button")
-	#get_tree().paused = false
-	#get_tree().reload_current_scene()
-	#print("Debug message: Scene reset")
-	#%GameOverMenu.visible = false
-	
-#func _on_exit_button_pressed() -> void:
-	#get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
-	#get_tree().quit()
 
 # Augment menue with 3 augments that are chosen at random
 func _on_player_augment_selection() -> void:
@@ -153,10 +142,6 @@ func weighted_randomizer(augments: Array, count: int = 3):
 	
 	if available_augments.is_empty():
 		return []
-	
-	#Adapt weighting
-	var t = clamp(float(player.stats["current_level"]) / 50.0, 0.0, 1.0)
-	var level_factor = lerp(1.0, 2.0, ease(t, 2.0))
 	
 	for i in range(count):
 		#Determine total weight
