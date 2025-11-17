@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://caqnyutvhi0wq"]
+[gd_scene load_steps=13 format=3 uid="uid://caqnyutvhi0wq"]
 
 [ext_resource type="Script" uid="uid://ctfimlg8n8vfk" path="res://Scripts/Main.gd" id="1_tepc8"]
 [ext_resource type="PackedScene" uid="uid://invqav08ym84" path="res://player.tscn" id="2_rcfrr"]
+[ext_resource type="PackedScene" uid="uid://i4fusyujahl6" path="res://map.tscn" id="3_20pc6"]
 [ext_resource type="PackedScene" uid="uid://w2yt158768o7" path="res://pine_tree.tscn" id="3_jw1vt"]
 [ext_resource type="Texture2D" uid="uid://767fen3qjsb3" path="res://Assets/Tiles/Large tiles/Thick outline/tile_0001.png" id="4_cmvgj"]
 [ext_resource type="FontFile" uid="uid://bl5bbhmi54l1i" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="5_h01lp"]
@@ -29,6 +30,7 @@ offset_left = -40.0
 offset_top = -45.0
 offset_right = 1989.0
 offset_bottom = 1126.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_rcfrr")]
 position = Vector2(492, 617)
@@ -43,23 +45,79 @@ position = Vector2(1637.2356, 1336.8901)
 rotation = 3.136538
 progress = 4562.78
 
+[node name="Map" parent="." instance=ExtResource("3_20pc6")]
+
 [node name="Trees" type="Node" parent="."]
 
 [node name="PineTree" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(296, 540)
+position = Vector2(276, 522)
 
 [node name="PineTree2" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(343, 605)
+position = Vector2(363, 630)
 scale = Vector2(0.935743, 0.917222)
 
 [node name="PineTree3" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(275, 631)
+position = Vector2(237, 654)
 
 [node name="PineTree4" parent="Trees" instance=ExtResource("3_jw1vt")]
 position = Vector2(1327, 669)
 
 [node name="PineTree5" parent="Trees" instance=ExtResource("3_jw1vt")]
 position = Vector2(1391, 281)
+
+[node name="PineTree6" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-342, 1198)
+
+[node name="PineTree7" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(39.999878, 1400)
+scale = Vector2(0.935743, 0.917222)
+
+[node name="PineTree8" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-620, 1044)
+
+[node name="PineTree9" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(1230, 1580)
+
+[node name="PineTree10" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(826, 1057)
+
+[node name="PineTree11" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-586, -701)
+
+[node name="PineTree12" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-499, -593)
+scale = Vector2(0.935743, 0.917222)
+
+[node name="PineTree13" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-625, -569)
+
+[node name="PineTree14" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-61, -530)
+
+[node name="PineTree15" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(3, -918)
+
+[node name="PineTree16" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-1491, 97)
+
+[node name="PineTree17" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-1348.0001, 201)
+scale = Vector2(0.935743, 0.917222)
+
+[node name="PineTree18" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-1616, -39)
+
+[node name="PineTree19" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-158, 381)
+
+[node name="PineTree20" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-562, -142)
+
+[node name="PineTree21" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-1338, -260)
+
+[node name="PineTree22" parent="Trees" instance=ExtResource("3_jw1vt")]
+position = Vector2(-562, -142)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 11.078

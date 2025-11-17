@@ -79,6 +79,10 @@ run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://rb36pk2jrmdg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 ExperienceSystem="*res://experience_system.tscn"
