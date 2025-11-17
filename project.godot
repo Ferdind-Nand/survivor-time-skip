@@ -79,6 +79,10 @@ run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://rb36pk2jrmdg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 ExperienceSystem="*res://experience_system.tscn"
@@ -138,4 +142,5 @@ pause_menu={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"

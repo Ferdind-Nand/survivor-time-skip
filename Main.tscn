@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctfimlg8n8vfk" path="res://Scripts/Main.gd" id="1_tepc8"]
 [ext_resource type="PackedScene" uid="uid://invqav08ym84" path="res://player.tscn" id="2_rcfrr"]
-[ext_resource type="PackedScene" uid="uid://w2yt158768o7" path="res://pine_tree.tscn" id="3_jw1vt"]
+[ext_resource type="PackedScene" uid="uid://i4fusyujahl6" path="res://map.tscn" id="3_20pc6"]
 [ext_resource type="Texture2D" uid="uid://767fen3qjsb3" path="res://Assets/Tiles/Large tiles/Thick outline/tile_0001.png" id="4_cmvgj"]
 [ext_resource type="FontFile" uid="uid://bl5bbhmi54l1i" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="5_h01lp"]
 [ext_resource type="FontFile" uid="uid://cb8vj4mhuf5ey" path="res://Assets/Fonts/Kenney Pixel.ttf" id="6_okvj6"]
@@ -29,9 +29,9 @@ offset_left = -40.0
 offset_top = -45.0
 offset_right = 1989.0
 offset_bottom = 1126.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_rcfrr")]
-position = Vector2(492, 617)
 
 [node name="Path2D" type="Path2D" parent="Player"]
 position = Vector2(-492, -617)
@@ -43,23 +43,10 @@ position = Vector2(1637.2356, 1336.8901)
 rotation = 3.136538
 progress = 4562.78
 
-[node name="Trees" type="Node" parent="."]
-
-[node name="PineTree" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(296, 540)
-
-[node name="PineTree2" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(343, 605)
-scale = Vector2(0.935743, 0.917222)
-
-[node name="PineTree3" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(275, 631)
-
-[node name="PineTree4" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(1327, 669)
-
-[node name="PineTree5" parent="Trees" instance=ExtResource("3_jw1vt")]
-position = Vector2(1391, 281)
+[node name="Map" parent="." instance=ExtResource("3_20pc6")]
+z_index = -10
+texture_filter = 1
+position = Vector2(-15, -5)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 11.078

@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cratu7amgp041" path="res://Assets/items&objects/autum trees.png" id="1_1s8l3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usc5w"]
-radius = 12.0
-height = 34.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1s8l3"]
+radius = 17.029387
 
 [node name="PineTree" type="StaticBody2D"]
 texture_filter = 1
@@ -17,5 +16,5 @@ region_enabled = true
 region_rect = Rect2(0, 0, 36, 48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
-shape = SubResource("CapsuleShape2D_usc5w")
+position = Vector2(-1, -8)
+shape = SubResource("CircleShape2D_1s8l3")
