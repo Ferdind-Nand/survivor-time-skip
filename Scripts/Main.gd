@@ -9,6 +9,7 @@ var augments_value:= [0,0,0]
 var augments_index:= [0,0,0]
 var augment_title: String
 var mob_spawn_count := 4
+var mob_spawn_increase := 3
 var wave_count := 1
 
 @onready var player = $Player
@@ -73,7 +74,7 @@ func _on_timer_timeout() -> void:
 		pass
 
 func _on_wave_increase_timer_timeout() -> void:
-	mob_spawn_count += 1
+	mob_spawn_count += mob_spawn_increase
 	wave_count += 1
 
 func _on_player_health_depleted() -> void:
