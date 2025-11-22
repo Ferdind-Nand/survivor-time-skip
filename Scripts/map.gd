@@ -8,7 +8,9 @@ var leaves_probability: int = 20 #higher means less
 var tree_probability: int = 5000 #higher means less 
 var tree_spacing: int = 12 #higher means less 
 var fairy_probability: int = 10000
-var leaf_radius := 6 #Tiles where leaves are visible around the player
+var leaf_radius := 12 #Tiles where leaves are visible around the player
+var leaf_density := 12
+var seed = 12345
 
 #Parameter for chunck grid
 @export var line_color := Color.RED
@@ -28,8 +30,30 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	repeat_trees_around_player()
+	leaf_generation()
 
-
+func leaf_generation():
+	var player_pos: Vector2 = Global.main.get_node("Player").global_position
+	var player_tile: Vector2i = %LeavesLayer.local_to_map(player_pos)
+	
+	%LeavesLayer.clear()
+	
+	for y in range(player_tile.y - leaf_radius,player_tile.y + leaf_radius + 1):
+		for x in range(player_tile.x - leaf_radius,player_tile.x + leaf_radius + 1):
+			var cell := Vector2i(x,y)
+			
+			if cell.distance_to(player_tile) > leaf_radius:
+				continue
+			
+			#Consistent random value for cell. This results in the cell keeping 
+			#the same value through one round
+			var h = hash(cell + Vector2i(seed, seed))
+			
+			if h % leaf_density == 0:
+				var tile_index = int((h >> 8) % 3) #0,1,2 leaf tiles (0,0) (0,1) and (0,2)
+				%LeavesLayer.set_cell(cell, 0, Vector2i(tile_index % 2, tile_index % 3)) 
+		
+	
 func repeat_trees_around_player():
 	var area := 1000 #half of area in func generate_map
 	var player_pos: Vector2 = Global.main.get_node("Player").global_position
@@ -48,7 +72,6 @@ func repeat_trees_around_player():
 		elif dy < -area: pos.y += area * 2
 		
 		tree.global_position = pos
-
 
 func generate_map(map_seed: int) -> Dictionary:
 	var rng := RandomNumberGenerator.new()

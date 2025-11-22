@@ -67,7 +67,7 @@ func _ready():
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause_menu"):
 		pause_menu()
-		
+
 func restore_map(map_data: Dictionary):
 	#Leaf loading
 	var leaves_layer := map.get_node("LeavesLayer")
@@ -86,8 +86,8 @@ func restore_map(map_data: Dictionary):
 			var tree = tree_scene.instantiate()
 			tree.global_position = Vector2(entry["x"], entry["y"])
 			map.get_node("Trees").add_child(tree)
+	
 	map.generate_map_eye_candy()
-		
 
 func reset_map():
 	SaveSystem.delete_save()
@@ -106,8 +106,6 @@ func reset_map():
 	
 	#Reload the level
 	get_tree().reload_current_scene()
-	
-	
 
 func pause_menu():
 	if paused:
