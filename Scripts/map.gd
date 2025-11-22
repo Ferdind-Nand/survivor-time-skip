@@ -18,15 +18,6 @@ var seed = 12345
 
 func _ready() -> void:
 	pass
-	#var poly := Polygon2D.new()
-	#poly.polygon = [
-		#Vector2(0, 0),
-		#Vector2(map_width, 0),
-		#Vector2(map_width, map_height),
-		#Vector2(0, map_height)
-	#]
-	#poly.color = line_color
-	#add_child(poly)
 
 func _process(_delta: float) -> void:
 	repeat_trees_around_player()
