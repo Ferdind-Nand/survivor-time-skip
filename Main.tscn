@@ -29,6 +29,7 @@ offset_left = -40.0
 offset_top = -45.0
 offset_right = 1989.0
 offset_bottom = 1126.0
+color = Color(0.85490197, 0.5019608, 0.20784314, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_rcfrr")]
@@ -219,6 +220,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_ddwck")]
 visible = false
+follow_viewport_enabled = true
 
 [node name="GameOverMenu" parent="." instance=ExtResource("10_xljvd")]
 unique_name_in_owner = true

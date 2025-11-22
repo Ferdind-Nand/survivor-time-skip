@@ -270,3 +270,5 @@ tile_set = SubResource("TileSet_iw27f")
 [node name="Trees" type="Node" parent="."]
 
 [node name="Fairies" type="Node" parent="."]
+
+[node name="DebugChunkBox" type="Node" parent="."]

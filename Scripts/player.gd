@@ -59,18 +59,15 @@ func _process(_delta):
 
 
 func _on_player_attacked():
-	print_debug(is_attacking)
 	if not is_attacking:
 		is_attacking = true
 		$Knight_Girl/AnimatedSprite2D.play("attack_1")
 	
 	
 func _on_attack_anima_finished():
-	print_debug(is_attacking)
 	if is_attacking:
 		is_attacking = false
 		$Knight_Girl/AnimatedSprite2D.play("idle_1")
-		print_debug("attack animation stopped")
 
 func _update_gun_stats() -> void:
 	if not gun:
@@ -107,7 +104,6 @@ func handle_give_experience_signal(value):
 		
 
 func level_up():
-	print("Debug message: Called level up func")
 	get_tree().paused = true
 	stats["current_experience"] -= stats["next_level_experience"]
 	stats["next_level_experience"] += 2 * stats["current_level"] # 5xp, 7xp, 11xp, 17xp, 
@@ -125,14 +121,14 @@ func level_up():
 
 func get_stat(stat_name: String) -> float:
 	if not stats.has(stat_name):
-		print("Unknown stat: ", stat_name)
+		printerr("Unknown stat: ", stat_name)
 		return 0.0
 	else:
 		return stats[stat_name]
 
 func _on_game_stat_increase(stat_name: String, increase_value: float) -> void:
 	if not stats.has(stat_name):
-		print("Unknown stat: ", stat_name)
+		printerr("Unknown stat: ", stat_name)
 		return
 	if stat_name in ["attack_speed", "experience_multiplier"]:
 		stats[stat_name] += increase_value / 100.0

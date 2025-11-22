@@ -6,9 +6,11 @@
 radius = 17.029387
 
 [node name="PineTree" type="StaticBody2D"]
+y_sort_enabled = true
 texture_filter = 1
 
 [node name="PineTree" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -43)
 scale = Vector2(2.1666667, 2.1666667)
 texture = ExtResource("1_1s8l3")

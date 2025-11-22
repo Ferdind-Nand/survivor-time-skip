@@ -6,8 +6,8 @@
 script = ExtResource("1_ml346")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 70.0
-offset_bottom = 66.0
+offset_right = 102.00008
+offset_bottom = 101.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -20,5 +20,10 @@ text = "Resume"
 layout_mode = 2
 text = "Exit"
 
+[node name="Reset World" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset World"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Reset World" to="." method="_on_reset_world_pressed"]
