@@ -17,6 +17,10 @@ var wave_count := 1
 @onready var gameOverMenu = $GameOverMenu
 var paused = false
 @export var enemy_spawn := EnemySpawn.ON
+@onready var map := $Map
+
+var save_data: Dictionary
+
 
 enum EnemySpawn {
 	ON,
@@ -40,6 +44,22 @@ var possible_augments = [
 	]
 
 func _ready():
+	#Data loading
+	save_data = SaveSystem.load_save()
+	
+	#If map does not exist yet
+	if save_data["map_data"].is_empty():
+		print("Generating new world...")
+		var new_map = map.generate_map(save_data["seed"])
+		print_debug("new map data: ", new_map)
+		save_data["map_data"] = new_map
+		SaveSystem.save(save_data)
+		restore_map(save_data["map_data"])
+	else:
+		print("Loading existing world...")
+		restore_map(save_data["map_data"])
+		
+
 	spawn_mob()
 	%DebugOverlay.get_node("StatsWindow").text = "Debug Window Test"
 	Global.main = self
@@ -48,6 +68,47 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause_menu"):
 		pause_menu()
 		
+func restore_map(map_data: Dictionary):
+	#Leaf loading
+	var leaves_layer := map.get_node("LeavesLayer")
+	leaves_layer.clear()
+	for entry in map_data["objects"]:
+		if entry["type"] == "leaves":
+			var cell = Vector2i(entry["x"], entry["y"])
+			var tile = str_to_var(entry["tile"])
+			print("Load leaves in ", cell, tile)
+			leaves_layer.set_cell(cell, 0, tile)
+	
+	#Tree loading
+	var tree_scene := preload("res://pine_tree.tscn")
+	for entry in map_data["objects"]:
+		if entry["type"] == "tree":
+			var tree = tree_scene.instantiate()
+			tree.global_position = Vector2(entry["x"], entry["y"])
+			map.get_node("Trees").add_child(tree)
+	map.generate_map_eye_candy()
+		
+
+func reset_map():
+	SaveSystem.delete_save()
+	print("World reset. Creating new world ...")
+	
+	var new_seed = randi()
+	save_data = {
+		"seed": new_seed,
+		"map_data": {}
+	}
+	
+	#Generate new world
+	var new_map = map.generate_map(new_seed)
+	save_data["map_data"] = new_map
+	SaveSystem.save(save_data)
+	
+	#Reload the level
+	get_tree().reload_current_scene()
+	
+	
+
 func pause_menu():
 	if paused:
 		pauseMenu.hide()
