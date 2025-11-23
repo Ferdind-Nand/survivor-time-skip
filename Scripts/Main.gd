@@ -20,6 +20,7 @@ var paused = false
 @onready var map := $Map
 
 var save_data: Dictionary
+var current_map_data : Dictionary
 
 
 enum EnemySpawn {
@@ -47,17 +48,18 @@ func _ready():
 	#Data loading
 	save_data = SaveSystem.load_save()
 	
-	#If map does not exist yet
+	#If map does not exist yet generate new map and save it, then load it
+	#Else just load it
 	if save_data["map_data"].is_empty():
 		print("Generating new world...")
-		var new_map = map.generate_map(save_data["seed"])
-		print_debug("new map data: ", new_map)
-		save_data["map_data"] = new_map
+		current_map_data = map.generate_map(save_data["seed"])
+		save_data["map_data"] = current_map_data
 		SaveSystem.save(save_data)
-		restore_map(save_data["map_data"])
 	else:
+		current_map_data = save_data["map_data"]
 		print("Loading existing world...")
-		restore_map(save_data["map_data"])
+	
+	restore_map(save_data["map_data"])
 		
 
 	spawn_mob()
@@ -69,6 +71,8 @@ func _process(_delta: float) -> void:
 		pause_menu()
 
 func restore_map(map_data: Dictionary):
+	map.evolve_map(map_data)
+	
 	#Leaf loading
 	var leaves_layer := map.get_node("LeavesLayer")
 	leaves_layer.clear()
@@ -81,11 +85,11 @@ func restore_map(map_data: Dictionary):
 	
 	#Tree loading
 	var tree_scene := preload("res://pine_tree.tscn")
-	for entry in map_data["objects"]:
-		if entry["type"] == "tree":
-			var tree = tree_scene.instantiate()
-			tree.global_position = Vector2(entry["x"], entry["y"])
-			map.get_node("Trees").add_child(tree)
+	for entry in map_data["trees"]:
+		var tree = tree_scene.instantiate()
+		tree.global_position = Vector2(entry["x"], entry["y"])
+		tree.scale = Vector2(0.75 + entry["age"]/5, 0.75 + entry["age"]/5)
+		map.get_node("Trees").add_child(tree)
 	
 	map.generate_map_eye_candy()
 
@@ -137,8 +141,10 @@ func _on_wave_increase_timer_timeout() -> void:
 	wave_count += 1
 
 func _on_player_health_depleted() -> void:
+	SaveSystem.save(save_data)
 	%GameOverMenu.visible = true
 	get_tree().paused = true
+	
 
 
 # Augment menue with 3 augments that are chosen at random
