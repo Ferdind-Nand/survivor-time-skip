@@ -33,8 +33,8 @@ var possible_augments = [
 	{"name": "Attack Speed+", "stat": "attack_speed" , "min": 40, "max": 70, "suffix": "%", "weight": 2, "max_amount": 4, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Attack Damage", "stat": "attack_damage" , "min": 0.3, "max": 1, "suffix": "", "weight": 10, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
 	{"name": "Attack Damage+", "stat": "attack_damage" , "min": 1.3, "max": 2, "suffix": "", "weight": 2, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
-	{"name": "Attack Range", "stat": "attack_range" , "min": 5, "max": 10, "suffix": "", "weight": 10, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
-	{"name": "Attack Range+", "stat": "attack_range" , "min": 15, "max": 20, "suffix": "", "weight": 5, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
+	{"name": "Attack Range", "stat": "attack_range" , "min": 15, "max": 20, "suffix": "", "weight": 10, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
+	{"name": "Attack Range+", "stat": "attack_range" , "min": 30, "max": 40, "suffix": "", "weight": 5, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Pierce", "stat": "pierce", "min": 1, "max": 1, "suffix": "", "weight": 2, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
 	{"name": "Pierce+", "stat": "pierce", "min": 2, "max": 2, "suffix": "", "weight": 1, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Move Speed", "stat": "move_speed" , "min": 25, "max": 50, "suffix": "", "weight": 10, "max_amount": 2000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
@@ -128,7 +128,7 @@ func spawn_mob(count := mob_spawn_count):
 		%PathFollow2D.progress_ratio = randf()
 		var mob := mob_scene.instantiate()
 		mob.global_position = %PathFollow2D.global_position
-		add_child(mob)
+		get_node("Enemies").add_child(mob)
 
 func _on_timer_timeout() -> void:
 	if enemy_spawn == EnemySpawn.ON:

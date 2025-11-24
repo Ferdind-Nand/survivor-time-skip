@@ -8,7 +8,7 @@ signal augment_selection
 #Player stats
 var stats := {
 	"health": 100.0,
-	"move_speed": 600.0,
+	"move_speed": 400.0,
 	"experience_multiplier": 1.0,
 	"current_experience": 0.0,
 	"next_level_experience": 5.0,
