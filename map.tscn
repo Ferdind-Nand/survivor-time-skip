@@ -265,9 +265,11 @@ tile_set = SubResource("TileSet_p5pve")
 
 [node name="LeavesLayer" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+z_index = -1
 tile_set = SubResource("TileSet_iw27f")
 
-[node name="Trees" type="Node" parent="."]
+[node name="Trees" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Fairies" type="Node" parent="."]
 
