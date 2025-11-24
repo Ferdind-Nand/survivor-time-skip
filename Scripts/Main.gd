@@ -17,6 +17,11 @@ var wave_count := 1
 @onready var gameOverMenu = $GameOverMenu
 var paused = false
 @export var enemy_spawn := EnemySpawn.ON
+@onready var map := $Map
+
+var save_data: Dictionary
+var current_map_data : Dictionary
+
 
 enum EnemySpawn {
 	ON,
@@ -28,8 +33,8 @@ var possible_augments = [
 	{"name": "Attack Speed+", "stat": "attack_speed" , "min": 40, "max": 70, "suffix": "%", "weight": 2, "max_amount": 4, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Attack Damage", "stat": "attack_damage" , "min": 0.3, "max": 1, "suffix": "", "weight": 10, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
 	{"name": "Attack Damage+", "stat": "attack_damage" , "min": 1.3, "max": 2, "suffix": "", "weight": 2, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
-	{"name": "Attack Range", "stat": "attack_range" , "min": 5, "max": 10, "suffix": "", "weight": 10, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
-	{"name": "Attack Range+", "stat": "attack_range" , "min": 15, "max": 20, "suffix": "", "weight": 5, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
+	{"name": "Attack Range", "stat": "attack_range" , "min": 15, "max": 20, "suffix": "", "weight": 10, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
+	{"name": "Attack Range+", "stat": "attack_range" , "min": 30, "max": 40, "suffix": "", "weight": 5, "max_amount": 1000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Pierce", "stat": "pierce", "min": 1, "max": 1, "suffix": "", "weight": 2, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
 	{"name": "Pierce+", "stat": "pierce", "min": 2, "max": 2, "suffix": "", "weight": 1, "max_amount": 10, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0017.png"},
 	{"name": "Move Speed", "stat": "move_speed" , "min": 25, "max": 50, "suffix": "", "weight": 10, "max_amount": 2000, "icon": "res://Assets/Tiles/Large tiles/Thick outline/tile_0014.png"},
@@ -40,6 +45,23 @@ var possible_augments = [
 	]
 
 func _ready():
+	#Data loading
+	save_data = SaveSystem.load_save()
+	
+	#If map does not exist yet generate new map and save it, then load it
+	#Else just load it
+	if save_data["map_data"].is_empty():
+		print("Generating new world...")
+		current_map_data = map.generate_map(save_data["seed"])
+		save_data["map_data"] = current_map_data
+		SaveSystem.save(save_data)
+	else:
+		current_map_data = save_data["map_data"]
+		print("Loading existing world...")
+	
+	restore_map(save_data["map_data"])
+		
+
 	spawn_mob()
 	%DebugOverlay.get_node("StatsWindow").text = "Debug Window Test"
 	Global.main = self
@@ -47,7 +69,48 @@ func _ready():
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause_menu"):
 		pause_menu()
-		
+
+func restore_map(map_data: Dictionary):
+	map.evolve_map(map_data)
+	
+	#Leaf loading
+	var leaves_layer := map.get_node("LeavesLayer")
+	leaves_layer.clear()
+	for entry in map_data["objects"]:
+		if entry["type"] == "leaves":
+			var cell = Vector2i(entry["x"], entry["y"])
+			var tile = str_to_var(entry["tile"])
+			print("Load leaves in ", cell, tile)
+			leaves_layer.set_cell(cell, 0, tile)
+	
+	#Tree loading
+	var tree_scene := preload("res://pine_tree.tscn")
+	for entry in map_data["trees"]:
+		var tree = tree_scene.instantiate()
+		tree.global_position = Vector2(entry["x"], entry["y"])
+		tree.scale = Vector2(0.75 + entry["age"]/5, 0.75 + entry["age"]/5)
+		map.get_node("Trees").add_child(tree)
+	
+	map.generate_map_eye_candy()
+
+func reset_map():
+	SaveSystem.delete_save()
+	print("World reset. Creating new world ...")
+	
+	var new_seed = randi()
+	save_data = {
+		"seed": new_seed,
+		"map_data": {}
+	}
+	
+	#Generate new world
+	var new_map = map.generate_map(new_seed)
+	save_data["map_data"] = new_map
+	SaveSystem.save(save_data)
+	
+	#Reload the level
+	get_tree().reload_current_scene()
+
 func pause_menu():
 	if paused:
 		pauseMenu.hide()
@@ -65,7 +128,7 @@ func spawn_mob(count := mob_spawn_count):
 		%PathFollow2D.progress_ratio = randf()
 		var mob := mob_scene.instantiate()
 		mob.global_position = %PathFollow2D.global_position
-		add_child(mob)
+		get_node("Enemies").add_child(mob)
 
 func _on_timer_timeout() -> void:
 	if enemy_spawn == EnemySpawn.ON:
@@ -78,8 +141,10 @@ func _on_wave_increase_timer_timeout() -> void:
 	wave_count += 1
 
 func _on_player_health_depleted() -> void:
+	SaveSystem.save(save_data)
 	%GameOverMenu.visible = true
 	get_tree().paused = true
+	
 
 
 # Augment menue with 3 augments that are chosen at random

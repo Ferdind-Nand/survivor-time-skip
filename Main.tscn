@@ -29,12 +29,14 @@ offset_left = -40.0
 offset_top = -45.0
 offset_right = 1989.0
 offset_bottom = 1126.0
+color = Color(0.85490197, 0.5019608, 0.20784314, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_rcfrr")]
+y_sort_enabled = true
 
 [node name="Path2D" type="Path2D" parent="Player"]
-position = Vector2(-492, -617)
+position = Vector2(-1020, -533)
 curve = SubResource("Curve2D_d4kkj")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
@@ -44,9 +46,12 @@ rotation = 3.136538
 progress = 4562.78
 
 [node name="Map" parent="." instance=ExtResource("3_20pc6")]
-z_index = -10
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(-15, -5)
+
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 11.078
@@ -219,6 +224,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_ddwck")]
 visible = false
+offset = Vector2(950, 500)
+transform = Transform2D(1, 0, 0, 1, 950, 500)
 
 [node name="GameOverMenu" parent="." instance=ExtResource("10_xljvd")]
 unique_name_in_owner = true
